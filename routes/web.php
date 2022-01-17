@@ -15,3 +15,5 @@ use App\Http\Controllers\backend\LoginController;
 */
 
 Route::get('/', [LoginController::class, 'login'])->name('login');
+Route::post('check-login', [LoginController::class, 'check_login'])->name('check-login');
+Route::get('/testing-mail', [LoginController::class, 'testingmail'])->name('testing-mail');
