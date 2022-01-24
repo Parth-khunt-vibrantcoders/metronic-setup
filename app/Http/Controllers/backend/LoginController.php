@@ -15,9 +15,9 @@ class LoginController extends Controller
 {
     public function login(){
 
-        $data['title'] = 'Petrol Station Web Software || Login';
-        $data['description'] = 'Petrol Station Web Software || Login';
-        $data['keywords'] = 'Petrol Station Web Software || Login';
+        $data['title'] = Config::get('constants.SYSTEM_NAME') . ' || Login';
+        $data['description'] = Config::get('constants.SYSTEM_NAME') . ' || Login';
+        $data['keywords'] = Config::get('constants.SYSTEM_NAME') . ' || Login';
         $data['css'] = array(
             'toastr/toastr.min.css'
         );

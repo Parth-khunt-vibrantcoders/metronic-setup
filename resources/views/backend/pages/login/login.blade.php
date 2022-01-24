@@ -67,7 +67,9 @@
             <!--end::Title-->
             <!--begin::Image-->
             {{-- <div class="content-img d-flex flex-row-fluid bgi-no-repeat bgi-position-y-bottom bgi-position-x-center" style="background-image: url({{  asset('public/backend/assets/media/svg/illustrations/login-visual-2.svg') }} );"></div> --}}
-            <div class="content-img d-flex flex-row-fluid bgi-no-repeat bgi-position-y-bottom bgi-position-x-center" style="background-image: url({{  asset('public/upload/system/login-bg.png') }} );"></div>
+           <!--begin::Image-->
+					<div class="content-img d-flex flex-row-fluid bgi-no-repeat bgi-position-y-bottom bgi-position-x-center" style="background-image: url({{  asset('public/backend/media/svg/illustrations/login-visual-2.svg') }} );"></div>
+					<!--end::Image-->
             <!--end::Image-->
         </div>
         <!--end::Content-->

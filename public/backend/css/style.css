@@ -23,3 +23,7 @@
 .display-none {
     display: none !important;
 }
+
+.aside-menu .menu-nav > .menu-item.menu-item-active > .menu-heading, .aside-menu .menu-nav > .menu-item.menu-item-active > .menu-link {
+    background-color: #1b1b28 !important;
+}
