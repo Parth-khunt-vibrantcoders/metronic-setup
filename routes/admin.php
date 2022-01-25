@@ -20,7 +20,8 @@ Route::group(['prefix' => $adminPrefix, 'middleware' => ['admin']], function() {
 
     Route::post('/common-ajaxcall', [CommonController::class, 'ajaxcall'])->name('common-ajaxcall');
 
-    Route::get('/admin-system-setting',[SystemsettingController::class,'list'])->name('admin-system-setting');
+    Route::get('/admin-system-setting',[SystemsettingController::class,'system_setting'])->name('admin-system-setting');
+    Route::get('/save-system-setting',[SystemsettingController::class,'save_system_setting'])->name('save-system-setting');
 
     $adminPrefix = "audittrails";
     Route::group(['prefix' => $adminPrefix, 'middleware' => ['admin']], function() {
