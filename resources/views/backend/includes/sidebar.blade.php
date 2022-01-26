@@ -40,7 +40,7 @@ if (!empty(Auth()->guard('admin')->user())) {
             <!--begin::Menu Nav-->
             <ul class="menu-nav">
 
-                <li class="menu-item {{ ( $currentRoute  ==  "admin-system-setting"   || $currentRoute  ==  "audit-trails"   || $currentRoute  ==  "dashboard"   || $currentRoute  ==  "admin-update-profile" || $currentRoute  ==  "admin-change-password" ? 'menu-item-active' : '' ) }} " aria-haspopup="true">
+                <li class="menu-item {{ ( $currentRoute  ==  "admin-system-setting"   || $currentRoute  ==  "audit-trails"   || $currentRoute  ==  "dashboard"   || $currentRoute  ==  "admin-update-profile" || $currentRoute  ==  "admin-change-password" || $currentRoute  ==  "smtp-setting"     ? 'menu-item-active' : '' ) }} " aria-haspopup="true">
                     <a href="{{ route('dashboard') }}" class="menu-link">
                         <span class="svg-icon menu-icon">
                             <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Layers.svg-->

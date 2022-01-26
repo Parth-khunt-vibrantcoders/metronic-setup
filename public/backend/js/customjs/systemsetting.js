@@ -70,9 +70,44 @@ var Systemsetting = function(){
     }
     }
 
+    var update = function(){
+        $('.select2').select2();
+        var form = $('#update-system-setting');
+        var rules = {
+            system_name : {required: true},
+            website_keywords : {required: true},
+            author : {required: true},
+            footer_text : {required: true},
+            footer_link : {required: true},
+            website_description : {required: true},
+            date_formate : {required: true},
+            decimal_point : {required: true},
+
+        };
+
+        var message = {
+            system_name : {required: "Please enter system name"},
+            website_keywords : {required: "Please enter website keyword"},
+            author : {required: "Please enter author name"},
+            footer_text : {required: "Please enter footer text"},
+            footer_link : {required: "Please enter footer link"},
+            website_description : {required: "Please enter website description"},
+            date_formate : {required: "Please enter date formate"},
+            decimal_point : {required: "Please enter decimal point"},
+
+
+        }
+        handleFormValidateWithMsg(form, rules,message, function(form) {
+            handleAjaxFormSubmit(form,true);
+        });
+    }
+
     return {
         init:function(){
             system();
+        },
+        edit: function(){
+            update();
         }
     }
 }();

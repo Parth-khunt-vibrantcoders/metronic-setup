@@ -5,6 +5,7 @@ use App\Http\Controllers\backend\dashboard\DashboardController;
 use App\Http\Controllers\backend\LoginController;
 use App\Http\Controllers\backend\dashboard\SystemsettingController;
 use App\Http\Controllers\backend\audittrails\AuditTrailsController;
+use App\Http\Controllers\backend\dashboard\SmtpsettingController;
 
 Route::get('/admin-logout', [LoginController::class, 'logout'])->name('admin-logout');
 
@@ -21,7 +22,10 @@ Route::group(['prefix' => $adminPrefix, 'middleware' => ['admin']], function() {
     Route::post('/common-ajaxcall', [CommonController::class, 'ajaxcall'])->name('common-ajaxcall');
 
     Route::get('/admin-system-setting',[SystemsettingController::class,'system_setting'])->name('admin-system-setting');
-    Route::get('/save-system-setting',[SystemsettingController::class,'save_system_setting'])->name('save-system-setting');
+    Route::post('/save-system-setting',[SystemsettingController::class,'system_setting'])->name('save-system-setting');
+   
+    Route::get('/smtp-setting',[SmtpsettingController::class,'smtp_setting'])->name('smtp-setting');
+    Route::post('/save-smtp-setting',[SmtpsettingController::class,'smtp_setting'])->name('save-smtp-setting');
 
     $adminPrefix = "audittrails";
     Route::group(['prefix' => $adminPrefix, 'middleware' => ['admin']], function() {
