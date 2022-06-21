@@ -14,16 +14,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('status')->insert([
-            'status' => "Active",
-            'created_at' => date("Y-m-d h:i:s"),
-            'updated_at' => date("Y-m-d h:i:s"),
-        ]);
-        DB::table('status')->insert([
-            'status' => "Dective",
-            'created_at' => date("Y-m-d h:i:s"),
-            'updated_at' => date("Y-m-d h:i:s"),
-        ]);
+
 
         DB::table('user_type')->insert([
             'user_role' => "Super Admin",
