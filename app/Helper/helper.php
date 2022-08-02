@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Systemsetting;
+
 function date_formate($date){
     return date("d-M-Y", strtotime($date));
 }
@@ -19,6 +21,11 @@ function ccd($value){
 
 function numberformat($value){
     return number_format((float)$value, Config::get('constants.DECIMAL_POINT'), '.', '');
+}
+
+function get_system_setting_details(){
+    $objSystemsetting = new Systemsetting();
+    return $objSystemsetting->get_system_settings_details();
 }
 
 ?>

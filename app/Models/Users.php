@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Event\UserCreated;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Audittrails;
@@ -9,6 +10,7 @@ use DB;
 use Hash;
 use Route;
 use Session;
+use Str;
 class Users extends Model
 {
     use HasFactory;
@@ -83,5 +85,49 @@ class Users extends Model
         }else{
             return "password_not_match";
         }
+    }
+
+    public function add_sign_up($request){
+
+            $checkEmail = Users::from('users')
+                          ->where('users.email', $request->input('email'))
+                          ->where('users.is_deleted', 'N')
+                          ->count();
+
+                if($checkEmail == 0){
+                   $objUsers = new Users();
+                   $objUsers->email = $request->input('email');
+                   $objUsers->first_name = $request->input('first_name');
+                   $objUsers->last_name = $request->input('last_name');
+                   $objUsers->mobile_no = $request->input('mobile_no');
+                   $password = Str::random(8);
+                   $objUsers->password = Hash::make($password);
+                   $objUsers->user_type = '2';
+                   $objUsers->status = '0';
+                   $objUsers->created_at = date('Y-m-d H:i:s');
+                   $objUsers->updated_at = date('Y-m-d H:i:s');
+                   if($objUsers->save()){
+                    event(new UserCreated( $request->input('first_name'),  $request->input('last_name'), $request->input('email'), $password));
+
+                       return 'true';
+                   }else{
+                       return 'false';
+                   }
+                }
+                return 'email_exits';
+    }
+
+    public function send_new_user_mail($first_name,$last_name,$email, $password){
+        $mailData['data']['first_name']= $first_name;
+        $mailData['data']['last_name']= $last_name;
+        $mailData['data']['password']= $password;
+        $mailData['data']['email']= $email;
+        $mailData['subject'] = 'Login Credentials';
+        $mailData['attachment'] = array();
+        $mailData['template'] = "emailtemplate.send_login_credential_mail";
+        $mailData['mailto'] = $email;
+
+        $sendMail = new SendMail();
+        $sendMail->sendSMTPMail($mailData);
     }
 }

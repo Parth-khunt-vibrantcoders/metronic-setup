@@ -19,11 +19,14 @@ class DashboardController extends Controller
         $data['description'] =  Config::get('constants.SYSTEM_NAME') . ' || dashboard';
         $data['keywords'] =  Config::get('constants.SYSTEM_NAME') . ' || dashboard';
         $data['css'] = array(
+            'toastr/toastr.min.css'
         );
         $data['plugincss'] = array(
         );
         $data['pluginjs'] = array(
+            'toastr/toastr.min.js',
             'plugins/validate/jquery.validate.min.js',
+            'pages/crud/file-upload/image-input.js'
         );
         $data['js'] = array(
             'comman_function.js',
@@ -40,7 +43,24 @@ class DashboardController extends Controller
                 'My Dashboard' => 'My Dashboard',
             )
         );
-        return view('backend.pages.dashboard.dashboard', $data);
+        $user_data = Auth()->guard('admin')->user();
+                if($user_data['user_type'] == '1'){
+                    return view('backend.pages.dashboard.dashboard', $data);
+                }else{
+                    if($user_data['user_type'] == '2' && $user_data['complete_bussiness_details'] == 'N'){
+                        return view('backend.pages.dashboard.business_details', $data);
+                    }elseif($user_data['user_type'] == '2' && $user_data['complete_bussiness_details'] == 'Y'){
+                        return view('backend.pages.dashboard.business_owner_dashboard', $data);
+                    }
+                    else{
+                        if($user_data['user_type'] == '3'){
+                            return view('backend.pages.dashboard.user', $data);
+                        }else{
+                            return view('backend.pages.dashboard.dashboard', $data);
+                        }
+                    }
+                }
+
     }
 
 
@@ -155,6 +175,30 @@ class DashboardController extends Controller
             }else{
                 $return['status'] = 'error';
                 $return['jscode'] = '$(".submitbtn:visible").removeAttr("disabled");$("#loader").hide();';
+                $return['message'] = 'Something goes to wrong';
+            }
+        }
+        echo json_encode($return);
+        exit;
+    }
+
+    public function save_business_detail(Request $request){
+
+        $objUsers = new Users();
+        $result = $objUsers->update_profile($request);
+        if ($result == "true") {
+            $return['status'] = 'success';
+             $return['jscode'] = '$(".submitbtn:visible").removeAttr("disabled");$("#loader").hide();';
+            $return['message'] = 'Your profile successfully updated.';
+            $return['redirect'] = route('admin-update-profile');
+        } else {
+            if ($result == "email_exist") {
+                $return['status'] = 'error';
+                 $return['jscode'] = '$(".submitbtn:visible").removeAttr("disabled");$("#loader").hide();';
+                $return['message'] = 'The email address has already been registered.';
+            }else{
+                $return['status'] = 'error';
+                 $return['jscode'] = '$(".submitbtn:visible").removeAttr("disabled");$("#loader").hide();';
                 $return['message'] = 'Something goes to wrong';
             }
         }

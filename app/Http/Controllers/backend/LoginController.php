@@ -26,6 +26,7 @@ class LoginController extends Controller
         $data['pluginjs'] = array(
             'toastr/toastr.min.js',
             'plugins/validate/jquery.validate.min.js',
+            'pages\custom\login\login-general.js',
         );
         $data['js'] = array(
             'comman_function.js',
@@ -50,6 +51,7 @@ class LoginController extends Controller
                 'email' => Auth::guard('admin')->user()->email,
                 'userimage' => Auth::guard('admin')->user()->userimage,
                 'usertype' => Auth::guard('admin')->user()->user_type,
+                'complete_bussiness_details' => Auth::guard('admin')->user()->complete_bussiness_details,
                 'id' => Auth::guard('admin')->user()->id
             );
             Session::push('logindata', $loginData);
@@ -63,6 +65,36 @@ class LoginController extends Controller
         }
         return json_encode($return);
         exit();
+    }
+
+    public function testingmail(){
+        $objSendmail = new SendMail();
+        $Sendmail = $objSendmail->sendMailltesting();
+    }
+
+    public function new_user_sign_up(Request $request){
+        $objUsers = new Users();
+        $result = $objUsers->add_sign_up($request);
+
+        if ($result == "true") {
+            $return['status'] = 'success';
+            $return['message'] = 'User successfully added.';
+            $return['jscode'] = '$("#loader").hide();';
+            $return['redirect'] = route('login');
+        }else{
+            if ($result == "email_exits") {
+                $return['status'] = 'warning';
+                $return['jscode'] = '$(".submitbtn:visible").removeAttr("disabled");$("#loader").hide();';
+                $return['message'] = 'Email already exits.';
+                }else{
+                $return['status'] = 'error';
+                $return['jscode'] = '$(".submitbtn:visible").removeAttr("disabled");$("#loader").hide();';
+                $return['message'] = 'Something goes to wrong.';
+
+                }
+        }
+        echo json_encode($return);
+        exit;
     }
 
 

@@ -68,4 +68,14 @@ class Systemsetting extends Model
         ->get()
         ->toArray();
     }
+
+    // public function get_syeteam_setting_details(){
+    //     return Systemsetting::select('system_setting.system_name', 'system_setting.login_background_color', 'system_setting.login_image', 'system_setting.theme_color', 'system_setting.currency_code', 'system_setting.currency_sysmbol', 'system_setting.author_name','system_setting.sidebar_color', 'system_setting.sidebar_menu_active_color', 'system_setting.sidebar_menu_font_color', 'system_setting.sidebar_navbar_color', 'system_setting.sidebar_navbar_font_color', 'system_setting.header_color', 'system_setting.header_font_color','system_setting.date_formate', 'system_setting.footer_text', 'system_setting.footer_link', 'system_setting.website_logo', 'system_setting.favicon_icon', 'system_setting.website_description', 'system_setting.id')
+    //     ->first();
+    // }
+
+    public function get_system_settings_details(){
+        return Systemsetting::select('system_setting.id','system_setting.system_name','system_setting.website_keywords','system_setting.author_name','system_setting.footer_text','system_setting.footer_link','system_setting.website_description','system_setting.website_logo','system_setting.favicon_icon','system_setting.decimal_point','system_setting.date_formate')
+        ->first();
+    }
 }

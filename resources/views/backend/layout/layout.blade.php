@@ -45,7 +45,23 @@
 		<div class="d-flex flex-column flex-root">
 			<!--begin::Page-->
 			<div class="d-flex flex-row flex-column-fluid page">
-                @include('backend.includes.sidebar')
+                @if (!empty(Auth()->guard('admin')->user()))
+                        @php
+                            $user_data = Auth()->guard('admin')->user();
+                        @endphp
+                        @if ($user_data['user_type'] == '1')
+                            @include('backend.includes.sidebar')
+                        @else
+                            @if ($user_data['user_type'] == '2' && $user_data['complete_bussiness_details'] == 'N')
+                                @include('backend.includes.owner_sidebar')
+                            @else
+                                 @include('backend.includes.sidebar')
+                            @endif
+                        @endif
+                @else
+
+                @endif
+
 
 				<!--begin::Wrapper-->
 				<div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">

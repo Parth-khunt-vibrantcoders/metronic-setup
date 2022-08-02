@@ -16,4 +16,6 @@ use App\Http\Controllers\backend\LoginController;
 
 Route::get('/', [LoginController::class, 'login'])->name('login');
 Route::post('check-login', [LoginController::class, 'check_login'])->name('check-login');
+Route::post('sign-up-user', [LoginController::class, 'new_user_sign_up'])->name('sign-up-user');
+
 Route::get('/testing-mail', [LoginController::class, 'testingmail'])->name('testing-mail');
