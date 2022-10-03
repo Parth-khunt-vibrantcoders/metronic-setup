@@ -35,24 +35,6 @@ Route::group(['prefix' => $adminPrefix, 'middleware' => ['admin']], function() {
         Route::post('audit-trails-ajaxcall', [AuditTrailsController::class, 'ajaxcall'])->name('audit-trails-ajaxcall');
     });
 
-    //Industry
-    Route::get('industry',[IndustryController::class,'list'])->name('industry');
-    Route::post('industry-ajaxcall',[IndustryController::class,'ajaxcall'])->name('industry-ajaxcall');
-    Route::get('add-industry',[IndustryController::class,'add'])->name('add-industry');
-    Route::post('add-save-industry',[IndustryController::class,'save_add_industry'])->name('add-save-industry');
-    Route::get('edit-industry/{id}',[IndustryController::class,'edit'])->name('edit-industry');
-    Route::post('edit-save-industry',[IndustryController::class,'save_edit_industry'])->name('edit-save-industry');
-
-    //Feedback Type
-    Route::get('feedback-type',[FeedbackTypeController::class,'list'])->name('feedback-type');
-    Route::get('add-feedback-type',[FeedbackTypeController::class,'add'])->name('add-feedback-type');
-    Route::post('add-save-feedback-type',[FeedbackTypeController::class,'save_add_feedback_type'])->name('add-save-feedback-type');
-    Route::get('edit-feedback-type/{id}',[FeedbackTypeController::class,'edit'])->name('edit-feedback-type');
-    Route::post('edit-save-feedback-type',[FeedbackTypeController::class,'save_edit_feedback_type'])->name('edit-save-feedback-type');
-
-
-    Route::post('feedback-type-ajaxcall',[FeedbackTypeController::class,'ajaxcall'])->name('feedback-type-ajaxcall');
-
 
 });
 
